@@ -1,5 +1,10 @@
 # -Kaggle-Traveling-Santa-2018---Prime-Paths
 This repository includes the codes I wrote for the titled competition on Kaggle. Link to competition: https://www.kaggle.com/c/traveling-santa-2018-prime-paths <br>
+
+The core of the approach is **ACO (Ant Colony Optimization)**. 
+>For those interested, refer to https://ieeexplore.ieee.org/document/4129846 <br>
+
+
 The core of the approach I took is called **ACO (Ant Colony Optimization)**, where the behavior of an ant colony is mimicked to obtain a 
 "promisingly short" path going through all assinged points once and only once. Roughly speaking, several artificial ants construct/modify paths using the following algorithm:
 1. The 1st ant takes a completely blind search (i.e. the probability of the choice from a point to next point is uniformly distributed) and leaves pheromones on its path with amount inverse proportaional to the total distance of its path.
