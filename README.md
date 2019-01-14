@@ -14,4 +14,4 @@ To solve issue 1, k-means clustering is applied layer by layer. More precisely, 
 (3) continue (2) until all subclusters have size less than or equal to $k$.<br>
 Notice that there is a tree structure in the process of establishing the sub-clusters, where the root represents the collection of all cities and for each node, its children are its sub-clusters. 
 
-To solve issue 2, a naive randomized paramter selection is implemented. Namely, pre-setting a range for the hyper-parameters ($\alpha, \beta, \rho, Q$), then uniformly generate choices of the hyper-parameters inside the range. 
+To solve issue 2, a naive randomized paramter selection is implemented. Namely, pre-setting a range for the hyper-parameters $(\alpha, \beta, \rho, Q)$, then uniformly generate choices of the hyper-parameters inside the range. For each generated hyper-paramters, implement ACO and compare the results to obtain the best result. (**Remark**: At the beginning, BFO (Bacterial Foraging Optimization) is planned to be used for paramter tuning. However, I realized that it is not as efficient as expected, so I just gave up on BFO and naively implements randomized selection.)
