@@ -10,7 +10,7 @@ Main issue of implementing ACO directly:
 
 To solve issue 1, k-means clustering is applied layer by layer. More precisely, suppose k = 20 is chosen, 
 (1) partition the whole collection of cities into k sub-clusters; <br>
-(2) for each sub-cluster S, if $$size(S)\geq k$$, sub-partition it into <br>
+(2) for each sub-cluster S, if $size(S)\geq k$, sub-partition it into <br>
 
 To solve issue 2, a naive randomized paramter selection is implemented. 
 
