@@ -37,10 +37,8 @@ At the beginning, the improvement is very substantial; however, after 2 days, th
 ## Final result/Comments:
 My best result: 1531162.85 <br>
 Rank-#1 result: 1513747.36 <br>
-It seems my best result is not too far from the result ranked #1; however, the competition is so competitive(?) that the ranking difference is a bit high. I am also suspecting that there are teams sharing codes/results privately to make the ranking difference exaggerated. I list below the teams which have exactly the same results (I suppose this would happen almost with probability 0): 
+It seems my best result is not too far from the result ranked #1; however, the competition is so competitive(?) that the ranking difference is a bit high. I am also suspecting that there are teams sharing codes/results privately to make the ranking difference exaggerated. I list below the teams which have exactly the same results (I suppose this would happen with probability almost 0(?); namely, they share privately codes/results with probability almost 1(?)): 
 >961 - 963, 912 - 920, 803 - 815, 790 - 794, 779 - 783, 759 - 766, 741 - 748, 728 - 729, 720 - 727, 718 - 719, 665 - 676, 646 - 648, 632 - 635, 628 - 631, 614 - 616, 600 - 604, 558 - 599, 556 - 557, 547 - 549, 540 - 542, 450 - 537, 447 - 448, 442 - 444, 439 - 441, 418 - 432, 415 - 416, 371 - 407, 339 - 370, 336 - 337, 303 - 313, 300 - 302, 282 - 285, 280 - 281, 277 - 279, 271 - 273, 252 - 253, 97 - 98.
-This can be verified by visiting 
+
+If one doesn't believe in me, one can visit the following link to have a look:
 > https://www.kaggle.com/c/traveling-santa-2018-prime-paths/leaderboard
-
-
-
