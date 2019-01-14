@@ -1,8 +1,10 @@
 # -Kaggle-Traveling-Santa-2018---Prime-Paths
-This repository includes the codes I wrote for the titled competition on Kaggle. Link to competition: https://www.kaggle.com/c/traveling-santa-2018-prime-paths <br>
+This repository includes the codes I wrote for the titled competition on Kaggle. 
+>Link to competition: https://www.kaggle.com/c/traveling-santa-2018-prime-paths <br>
 
 The core of the approach is **ACO (Ant Colony Optimization)**. 
 > For details, we refer the readers to https://ieeexplore.ieee.org/document/4129846 <br>
+
 Notice that ACO was originally designed to solve TSP (Travelling Salesman Problem), where it is required to start and end on the same city. However, it is easy to implement the idea of ACO and generalize the algorithm to allow the starting and ending city to be different. This is the case for the ACO algorithm I wrote for this competition. 
 
 ## Main issues of implementing ACO directly on the collection of all cities are:
@@ -29,6 +31,9 @@ Set a positive integer $k$, say $k = 20$.
 5. Continue 4 as many times as desired. We may also change $k$ before continuing 4. 
 
 ## Issue encountered when implenting 5:
+At the beginning, the improvement is very substantial; however, after 2 days, there are only very small improvements. My solution is to write parallel agents that modify the path simultaneously. However, it seems the improvement decrease is exponential and not able to be overcome by adding finitely many parallel agents.
+
+## Final result:
 
 
 
