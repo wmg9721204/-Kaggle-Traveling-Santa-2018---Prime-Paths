@@ -23,4 +23,5 @@ To solve issue 2, a naive randomized paramter selection is implemented. Namely, 
 3. With the results obtained in 2, it remains to apply ACO on "bottom sub-clusters". 
 
 The resulting path is a "good" path. However, it is still "not good enough" to be competitive in this competition since the "prime city constraint" is taken into consideration yet. To put the "prime city constraint" into effect, the following "path modifictaion" approach is invented and called **ACC (Ant Colony Correction)**:
+
 4. Set a positive integer $k$. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|_{[s,s+k]}$. 
