@@ -5,7 +5,7 @@ The core of the approach is **ACO (Ant Colony Optimization)**.
 > For details, we refer the readers to https://ieeexplore.ieee.org/document/4129846 <br>
 Notice that ACO was originally designed to solve TSP (Travelling Salesman Problem), where it is required to start and end on the same city. However, it is easy to implement the idea of ACO and generalize the algorithm to allow the starting and ending city to be different. This is the case for the ACO algorithm I wrote for this competition. 
 
-Main issues of implementing ACO directly on the collection of all cities are:
+## Main issues of implementing ACO directly on the collection of all cities are:
 1. The size of the collection of cities is too big to be all processed at the same time. 
 2. The hyper-paramters of ACO needs to be tuned.
 
@@ -22,6 +22,11 @@ To solve issue 2, a naive randomized paramter selection is implemented. Namely, 
 2. For each sub-cluster that has sub-clusters, apply ACO, where the distances between sub-clusters are defined as the minimum among the distances between all possible pairs of inter-sub-cluster points. (The computational cost of this distance by brute force is very high. A random walk algorithm on two given point clouds is designed and implemented.)
 3. With the results obtained in 2, it remains to apply ACO on "bottom sub-clusters". 
 
-The resulting path is a "good" path. However, it is still "not good enough" to be competitive in this competition since the "prime city constraint" is taken into consideration yet. To put the "prime city constraint" into effect, the following "path modifictaion" approach is invented and called **ACC (Ant Colony Correction)**:
+The resulting path is a "good" path. However, it is still "not good enough" to be competitive in this competition since the "prime city constraint" is not taken into consideration yet. To put the "prime city constraint" into effect, the following "path modifictaion" approach is invented and called **ACC (Ant Colony Correction)**:
 
-4. Set a positive integer $k$. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|_{[s,s+k]}$. 
+4. Set a positive integer $k$, say $k = 20$. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|_{[s,s+k]}$. Now apply ACO on $P|_{[s,s+k]}$ (several times); if the best sub-path obtained by ACO is better than $P|_{[s,s+k]}$, replace $P|_{[s,s+k]}$ by the obtained best path. 
+5. Continue 4 as many times as desired. 
+
+## Difficulty encountered when implenting 5:
+
+
