@@ -24,8 +24,9 @@ To solve issue 2, a naive randomized paramter selection is implemented. Namely, 
 
 The resulting path is a "good" path. However, it is still "not good enough" to be competitive in this competition since the "prime city constraint" is not taken into consideration yet. To put the "prime city constraint" into effect, the following "path modifictaion" approach is invented and called **ACC (Ant Colony Correction)**:
 
-4. Set a positive integer $k$, say $k = 20$. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|_{[s,s+k]}$. Now apply ACO on $P|_{[s,s+k]}$ (several times); if the best sub-path obtained by ACO is better than $P|_{[s,s+k]}$, replace $P|_{[s,s+k]}$ by the obtained best path. 
-5. Continue 4 as many times as desired. 
+Set a positive integer $k$, say $k = 20$.
+4. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|_{[s,s+k]}$. Now apply ACO on $P|_{[s,s+k]}$ (several times); if the best sub-path obtained by ACO is better than $P|_{[s,s+k]}$, replace $P|_{[s,s+k]}$ by the obtained best path. 
+5. Continue 4 as many times as desired. We may also change $k$ before continuing 4. 
 
 ## Difficulty encountered when implenting 5:
 
