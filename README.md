@@ -5,4 +5,4 @@ The core of the approach I took is called **ACO (Ant Colony Optimization)**, whe
 1. The 1st ant takes a completely blind search (i.e. the probability of the choice from a point to next point is uniformly distributed) and leaves pheromones on its path with amount inverse proportaional to the total distance of its path.
 2. With the updated pheromone, the 2nd ant has some biases on the choice from a point to another according to the amount of pheromone left by the 1st ant. Now a new path is constructed by the 2nd ant. Update the pheromone amount inversely proportional to the total distance of its path. 
 3. Repeat step 2. for the 3rd, 4th, ..., ants. Eventually, the pheromone distribution "could converge" and the final path is obtained.
-The main problem for ACO is that there are some hyper-parameters to tune: $\alpha$, $\beta$
+The main problem for ACO is that there are some hyper-parameters to tune: $$\alpha$$, $$\beta$$
