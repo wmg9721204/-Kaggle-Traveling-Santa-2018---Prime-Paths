@@ -4,6 +4,15 @@ This repository includes the codes I wrote for the titled competition on Kaggle.
 The core of the approach is **ACO (Ant Colony Optimization)**. 
 >For those interested, refer to https://ieeexplore.ieee.org/document/4129846 <br>
 
+Main issue of implementing ACO directly:
+1. The size of the collection of cities is too big to be all processed at the same time. 
+2. The hyper-paramters of ACO needs to be tuned. 
+
+To solve issue 1, k-means clustering is applied layer by layer. More precisely, suppose k = 20 is chosen, 
+(1) partition the whole collection of cities into k sub-clusters; <br>
+(2) for each sub-cluster S, if $$size(S)\geq k$$, sub-partition it into <br>
+
+To solve issue 2, a naive randomized paramter selection is implemented. 
 
 The core of the approach I took is called **ACO (Ant Colony Optimization)**, where the behavior of an ant colony is mimicked to obtain a 
 "promisingly short" path going through all assinged points once and only once. Roughly speaking, several artificial ants construct/modify paths using the following algorithm:
