@@ -4,8 +4,8 @@ global R = readlines(f);
 close(f)
 
 ## Set the length of sub-paths to be modified
-global k = 50
-global N = 20 ## number of agents
+global k = 20
+global N = 2 ## number of agents
 
 ## Generate the codes
 using DelimitedFiles

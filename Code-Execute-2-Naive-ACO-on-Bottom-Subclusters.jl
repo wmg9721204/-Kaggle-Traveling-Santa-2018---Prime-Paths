@@ -53,10 +53,11 @@ using ProgressMeter
     global Done = i
     save("Sol_naive_Done_$(k)_$(N_d).jld2", Dict("Sol_naive"=>Sol_naive, "Done"=>Done))
 end
+rm("Sol_naive_Done_$(k)_$(N_d).jld2")
 #####################################################################
 global Polar_Index = findfirst((x->(x==1)), Sol_naive)
 global Z = [Sol_naive[Polar_Index:end]; Sol_naive[1:Polar_Index]].-1
 ###############################################################
 ## Save the final result as a csv file
 global df = DataFrame([Z], [:Path]); ## store as dataframe type and add the column name :Path
-CSV.write("Z_$(k)_$(N_d).csv", df)
+CSV.write("Good-Path-newest.csv", df)

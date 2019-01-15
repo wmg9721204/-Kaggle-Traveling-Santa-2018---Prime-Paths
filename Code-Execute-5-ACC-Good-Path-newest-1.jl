@@ -12,7 +12,7 @@ global Path_File = "Good-Path-newest"
 using LinearAlgebra ## for the function "norm"
 using StatsBase ## for function "sample"
 
-global k = 50
+global k = 20
 global Range = [0.0 5.0; 0.0 5.0; 0.0 1.0; 0.0 30.0]
 global N_sample = 500;
 global Imp_total = 0.0 ## improve total
