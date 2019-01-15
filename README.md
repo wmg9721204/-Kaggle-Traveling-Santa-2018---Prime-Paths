@@ -29,10 +29,13 @@ The resulting path is a "good" path. However, it is still "not good enough" to b
 Set a positive integer $k$, say $k = 20$.
 
 4. For a given path $P$ of length $L$, randomly choose an integer $s$ in $[0,L-k]$. Consider the sub-path $P|{[s,s+k]}$. Now apply ACO on $P|{[s,s+k]}$ (several times); if the best sub-path obtained by ACO is better than $P|{[s,s+k]}$, replace $P|{[s,s+k]}$ by the obtained best path. 
-5. Continue 4 as many times as desired. We may also change $k$ before continuing 4. 
+5. Continue 4 as many times as desired. We may also change $k$ before continuing 4.
 
 ## Issue encountered when implenting 5:
 At the beginning, the improvement is very substantial; however, after 2 days, there are only very small improvements. My solution is to write parallel agents that modify the path simultaneously. However, it seems the improvement decrease is exponential and not able to be overcome by adding finitely many parallel agents.
+
+## How to run the code
+Please look at the codes in "(Done) Code-Execute-Final-Test.ipynb" and run the codes therein. 
 
 ## Final result/Comments:
 My best result: 1531162.85 <br>
