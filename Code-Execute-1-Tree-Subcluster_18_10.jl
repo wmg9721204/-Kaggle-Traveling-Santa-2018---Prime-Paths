@@ -2,17 +2,18 @@ using DataFrames
 using CSV
 Cities = CSV.read("cities.csv")
 global Data = Array{Float64,2}([Cities[:X]'; Cities[:Y]']);
-##global Data = rand(2,1000)
+## global Data = rand(2,1000)
 ################################################################################################
 include("src//ParaSelectACO.jl")
-## Set the hyperparameters for ParaSelectACO
-global Range = [0.0 5.0; 0.0 5.0; 0.0 1.0; 0.0 30.0]
-global N_sample = 500;
+## Hyperparameters for ParaSelectACO
+global Range = [0.0 5.0; 0.0 5.0; 0.0 1.0; 0.0 30.0] ## alpha/beta/rho/Q for ACO (in order)
+global N_sample = 500; ## Number of times for randomly generating hyper-paramters
 #################################################################################
 include("src//kNNRWICDist.jl")
 ############################################################
-global k = 18
-global N_d = 10
+## Hyper-parameters
+global k = 18 ## upper bound for tree sub-clustering
+global N_d = 10 ## retrying times of subclustering
 #############################################################
 C = collect(1:size(Data,2))
 global Sub_Clusters = Array{Int,1}[C]
@@ -21,9 +22,8 @@ global Path = Array{Int,1}[C] ## the path of clusters
 global In_Out = Array{Int,1}[[1,1]] ## the in/out-point corresponding to each cluster in Path
 ###########################################################################################
 using Clustering
-global T = 0
 ## (Initializing step)
-println("Initialization Step")
+println("Initialization Step: applying ACO on layer-1 sub-clusters")
 for init = 1
     Path_copy = copy(Path)
     global Path = Array{Int,1}[]
@@ -62,7 +62,7 @@ for init = 1
         end
     end
 
-    PSACO = ParaSelectACO(Range, N_sample, Dist_subs, O, G; Na=200)
+    PSACO = ParaSelectACO(Range, N_sample, Dist_subs, O, G; Na=200) ## Na = number of ants used to ACO
     append!(Path, C_subs[PSACO["Best_Path"]][1:end-1])
     global Bottom_Clusters = Bottom_Clusters
     P = PSACO["Best_Path"]
@@ -77,7 +77,8 @@ include("src//CutHalf2.jl")
 include("src//Nearest.jl")
 #######################################################################
 ## (Loop step)
-println("Loop Step")
+println("Loop Step: applying ACO on non-bottom sub-clusters")
+global T= 0
 while length(Sub_Clusters)!=0
     Path_copy = copy(Path)
     global Path = Array{Int,1}[]
@@ -189,64 +190,3 @@ writedlm("Path-length.txt", (length(Path)))
 using FileIO
 save("Path_In_Out_$(k)_$(N_d).jld2", Dict("Path"=>Path, "In_Out"=>In_Out))
 #############################################################################
-
-println("Implement Naive ACO (not considering 10-step constratint)")
-## global k = 22
-## global N_d = 10
-using FileIO
-global d = load("Path_In_Out_$(k)_$(N_d).jld2")
-global Path = d["Path"]
-global In_Out = d["In_Out"]
-
-try
-    D_Sol_naive_Done = load("Sol_naive_Done_$(k)_$(N_d).jld2")
-    global Done = D_Sol_naive_Done["Done"]
-    global Sol_naive = D_Sol_naive_Done["Sol_naive"]
-catch
-    global Done = 0
-end    
-
-using DataFrames
-using CSV
-Cities = CSV.read("cities.csv")
-global Data = Array{Float64,2}([Cities[:X]'; Cities[:Y]']);
-
-include("src//ParaSelectACO.jl")
-## Set the hyperparameters for ParaSelectACO
-global Range = [0.0 5.0; 0.0 5.0; 0.0 1.0; 0.0 30.0]
-global N_sample = 500;
-
-if Done==0
-    global Sol_naive = Int[]
-end
-
-println("Start from $(Done+1)")
-using ProgressMeter
-@showprogress 1 "Computing..." for i = Done+1:length(Path)
-    ## println(i)
-    P_i = Path[i]
-    Dist_i = zeros(length(P_i), length(P_i))
-    for j = 1:length(P_i)-1
-        for k = j+1:length(P_i)
-            Dist_i[j,k] = norm(Data[:,P_i][:,j]-Data[:,P_i][:,k])
-            Dist_i[k,j] = Dist_i[j,k]
-        end
-    end
-    Dist_i
-    O = In_Out[i][1]
-    G = In_Out[i][2];
-    PSACO = ParaSelectACO(Range, N_sample, Dist_i, O, G; Na=200)
-    if O==G
-        append!(Sol_naive, P_i[PSACO["Best_Path"]][1:end-1])
-    else
-        append!(Sol_naive, P_i[PSACO["Best_Path"]])
-    end
-    global Done = i
-    save("Sol_naive_Done_$(k)_$(N_d).jld2", Dict("Sol_naive"=>Sol_naive, "Done"=>Done))
-end
-#####################################################################
-global Polar_Index = findfirst((x->(x==1)), Sol_naive)
-global Z = [Sol_naive[Polar_Index:end]; Sol_naive[1:Polar_Index]].-1
-###############################################################
-global df = DataFrame([Z], [:Path]); ## store as dataframe type and add the column name :Path
-CSV.write("Z_$(k)_$(N_d).csv", df)
